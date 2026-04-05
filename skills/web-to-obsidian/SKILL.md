@@ -58,33 +58,32 @@ defuddle parse <url> -p description # 描述
 
 1. **添加 frontmatter 属性** - title、date、tags
 2. **使用 Callouts** - `> [!类型]` 突出重点
-3. **添加 Wikilinks** - `[[相关笔记]]` 建立连接
+3. **添加 Wikilinks** - `[[相关笔记]]` 建立连接, 真的有相关笔记存在，才建立
 4. **整理结构** - 添加目录、摘要、相关链接
-5. **插入图片** - **关键步骤！** 将 Step 1 提取的图片手动插入到笔记对应位置
+5. **插入图片** - **关键步骤！** 将图片 markdown 格式直接插入到内容对应位置
 
-> [!warning] 必须手动插入图片
-> 提取图片链接后，必须手动将图片插入到笔记内容中对应的位置，不能遗漏。
+> [!warning] 正确流程：先插入图片，再 write
+> - 提取图片链接后，先将图片插入到内容中对应位置
+> - 然后**一次性 write 完整内容**（包含图片）
+> - **不要分两步**：先写没有图片的版本，再手动 edit 添加
+> - 这样可以避免遗漏图片
 
 ### Step 4: 创建笔记
 
-**首选方法**：使用 obsidian-cli 创建笔记
-
-```bash
-# 创建笔记（会打开编辑器）
-obsidian create name="笔记名称" silent
-
-# 或者指定内容创建
-obsidian create name="笔记名称" content="笔记内容"
-```
-
-**备选方法**：直接用 write 写入 WebNote 目录（当笔记内容含特殊字符时使用）
+**推荐方法**：直接用 write 写入 WebNote 目录
 
 ```bash
 # vault 路径
 VAULT_PATH="/Users/lidongfeng/Library/Mobile Documents/iCloud~md~obsidian/Documents/dongfeng"
 
-# 写入笔记到 WebNote 目录
-write content="笔记内容" filePath="${VAULT_PATH}/WebNote/笔记名.md"
+# 一次性写入完整内容（包含图片）
+write content="笔记完整内容" filePath="${VAULT_PATH}/WebNote/笔记名.md"
+```
+
+**备选方法**：使用 obsidian-cli
+
+```bash
+obsidian create name="笔记名称" content="笔记内容"
 ```
 
 ## 模板格式
